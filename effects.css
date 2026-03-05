@@ -1,0 +1,384 @@
+body {
+    background-color: #f3d8f9; /* light pink color by default */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+body.page-3-bg {
+    background-color: #f2dfc5; /* Cream/Beige matching the image */
+}
+
+body.page-4-bg {
+    background-color: #f9d9d9; /* Cream/Beige matching the image */
+}
+
+button {
+    text-decoration: underline;
+    border-radius: 12px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background-color: #ffb6c1; /* light pink */
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: #ff9eaa;
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    80% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+h1, p, h5 {
+    animation: popup 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Background Flower Styles */
+.flower-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1; 
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.flower {
+    position: relative;
+    width: 0;
+    height: 0;
+    animation: rotateFlower 20s linear infinite;
+}
+
+.petal {
+    position: absolute;
+    width: 120px;
+    height: 300px;
+    background: radial-gradient(circle, #fff, rgba(255, 182, 193, 0.5));
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    bottom: 0;
+    left: -60px; /* Half of the width */
+    transform-origin: bottom center;
+    transform: rotate(var(--angle)) scale(0);
+    animation: bloomPetal 3s ease-out 0.5s forwards;
+    box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
+}
+
+.center {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #ffe066, #ffb300);
+    border-radius: 50%;
+    top: -40px; /* Half of height to align center */
+    left: -40px; /* Half of width to align center */
+    transform: scale(0);
+    animation: bloomCenter 2s ease-out 1.5s forwards;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+}
+
+@keyframes bloomPetal {
+    0% {
+        transform: rotate(var(--angle)) scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(var(--angle)) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bloomCenter {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateFlower {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Popup GIF Styles */
+#popup-gif {
+    position: fixed;
+    bottom: -300px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.5);
+    width: 250px;
+    border-radius: 15px;
+    opacity: 0;
+    z-index: 100;
+    pointer-events: none;
+}
+
+#popup-gif.show-popup {
+    animation: bulgeOut 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes bulgeOut {
+    0% {
+        bottom: -300px;
+        transform: translateX(-50%) scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        bottom: 30%;
+        transform: translateX(-50%) scale(1.4);
+        opacity: 1;
+    }
+    100% {
+        bottom: 30%;
+        transform: translateX(-50%) scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Women's day text styles */
+.Womens-Day-container {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+    z-index: 10;
+}
+
+.Womens-Day-container h1 {
+    font-size: 8rem;
+    margin: -10px 0;
+    line-height: 1.5;
+    text-transform: capitalize;
+    font-family: "Marker Felt", fantasy;
+}
+
+/* Page 4 styles */
+.page-4-title {
+    color: #ff0000;
+    font-family: "Marker Felt", fantasy;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.page-4-text {
+    color: #ff69b4;
+    font-family: fantasy, Herculanum, Arial, Helvetica, sans-serif ;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    white-space: pre-wrap; /* Keeps line breaks from HTML */
+    text-align: left;
+}
+
+.page-4-bg .message-box,
+.page-5-bg .message-box {
+    max-width: 600px;
+    padding: 50px;
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque */
+    position: relative;
+    z-index: 10;
+}
+
+.page-5-message h1 {
+    font-family: "Bradley Hand", "Bradley Hand ITC", cursive, sans-serif;
+    font-size: 2.5rem;
+    margin: 0;
+    color: #ff0000;
+    animation: colorShift 8s infinite alternate 0.8s;
+}
+
+/* Used for JS word-by-word animation */
+.page-5-word {
+    opacity: 0;
+    display: inline-block;
+    animation: fadeWordIn 0.3s forwards;
+    white-space: pre-wrap;
+}
+
+@keyframes fadeWordIn {
+    to { opacity: 1; }
+}
+
+@keyframes colorShift {
+    0% { color: #ff0000; } /* Red */
+    25% { color: #ff69b4; } /* Pink */
+    50% { color: #9370db; } /* Purple */
+    75% { color: #00bfff; } /* Deep Sky Blue */
+    100% { color: #32cd32; } /* Lime Green */
+}
+
+/* Random Blooming Flowers */
+.bloom-flower {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: 1; /* Behind message box */
+    pointer-events: none;
+    transform: scale(0);
+    opacity: 0;
+    /* This animation will be dynamically sped up per flower */
+    animation: randomBloom 6s ease-in-out forwards;
+}
+
+.bloom-petal {
+    position: absolute;
+    width: 25px;
+    height: 60px;
+    background: radial-gradient(circle, #fff, rgba(255, 105, 180, 0.7)); /* Hot pink edge, white center */
+    border-radius: 50% 50% 0 0;
+    left: 17.5px; /* Center horizontally */
+    transform-origin: bottom center;
+}
+
+.bloom-center {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #ffee58, #ff8f00);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+}
+
+@keyframes randomBloom {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    20% { transform: scale(1) rotate(20deg); opacity: 0.6; } /* blooms */
+    80% { transform: scale(1) rotate(-10deg); opacity: 0.6; } /* stays visible for a while */
+    100% { transform: scale(0.8) translateY(20px); opacity: 0; } /* fades away slightly downward */
+}
+
+/* Page Transition Animations */
+.slide-up-out {
+    animation: slideUpOut 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards !important;
+}
+
+@keyframes slideUpOut {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.slide-up-in {
+    animation: slideUpIn 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+@keyframes slideUpIn {
+    0% { transform: translateY(100vh); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.wd-Happy {
+    color: #ff69b4; /* Pink */
+}
+
+.wd-Womens {
+    color: #ff0000; /* Red */
+}
+
+.wd-Day {
+    color: #ff69b4; /* Pink */
+}
+
+/* Queen graphic styles */
+.queen-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 45%; 
+    height: 90vh; /* Fills most of the right vertical space */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    pointer-events: none; /* Let clicks pass through if needed */
+    z-index: 5;
+    animation: slideInRight 1.5s ease-out forwards;
+}
+
+.queen-container img {
+    max-height: 115%;
+    max-width: 110%;
+    object-fit: contain;
+    border-radius: 3%;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideInRight {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Sparkling stars */
+.sparkle {
+    position: absolute;
+    font-size: 2.5rem;
+    color: #ffca28; /* Goldish */
+    animation: sparkle-anim 1.5s infinite alternate;
+}
+
+.s1 { top: -20px; left: -30px; animation-delay: 0s; }
+.s2 { top: -40px; right: 20%; animation-delay: 0.3s; }
+.s3 { bottom: 20%; left: 110%; animation-delay: 0.6s; }
+.s4 { bottom: -10px; right: 10%; animation-delay: 0.9s; }
+.s5 { top: 40%; left: -60px; animation-delay: 1.2s; }
+.s6 { top: 10%; right: -50px; animation-delay: 0.8s; }
+
+@keyframes sparkle-anim {
+    0% { transform: scale(0.6) rotate(0deg); opacity: 0.4; }
+    100% { transform: scale(1.2) rotate(20deg); opacity: 1; }
+}
+
+/* Falling petals */
+.petal-shower {
+    position: fixed;
+    top: -10%;
+    z-index: 1; /* Behind text, above background */
+    pointer-events: none;
+    background: radial-gradient(circle, #fff, rgba(255, 182, 193, 0.8));
+    border-radius: 50% 0 50% 50%;
+    animation: fall linear forwards;
+    filter: drop-shadow(0 0 5px rgba(242, 223, 197, 0.6));
+}
+
+@keyframes fall {
+    0% {
+        transform: translate(0, -10px) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), 110vh) rotate(var(--rot)) scale(var(--s));
+        opacity: 0;
+    }
+}
